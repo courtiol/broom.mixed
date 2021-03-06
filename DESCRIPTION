@@ -70,5 +70,4 @@ BugReports: http://github.com/bbolker/broom.mixed/issues
 License: GPL-3
 RoxygenNote: 7.1.1
 Encoding: UTF-8
-Additional_repositories: http://bbolker.github.io/drat
 VignetteBuilder: knitr
