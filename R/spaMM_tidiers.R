@@ -84,8 +84,8 @@ glance.HLfit <- function(x, AIC.details = FALSE, npar.details = FALSE, ...) {
   
   ## Compute number of parameters (always):
   tbl_npar <- tibble::tibble(npar.fixed = x$dfs$pforpv,
-                             npar.rand = x$dfs$p_lambda, #length(attr(spaMM::get_ranPars(x)$ranCoefs[[1]], "transf"))
-                             npar.cor = x$dfs$p_corrPars, #max(c(as.numeric(lapply(x$corrPars, length)), 0L))
+                             npar.rand = x$dfs$p_lambda,
+                             npar.cor = x$dfs$p_corrPars,
                              npar.family = ifelse(x$family$family == "negbin", 1L, 0L),
                              npar.resid = x$dfs$p_fixef_phi,
                              npar = .data$npar.fixed + .data$npar.rand + .data$npar.cor + .data$npar.family + .data$npar.resid)
