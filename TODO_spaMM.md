@@ -56,6 +56,7 @@ TO COME
 - [ ] uncomment added comment in test-stanarm.R
 - [ ] merge latest broom.mixed
 - [ ] store fitted models as rda in inst/extdata (produced in run_example.R)
+- [ ] update documentation (see https://roxygen2.r-lib.org/articles/markdown.html)
 - [ ] update examples
 - [ ] update vignette
 - [ ] update NEWS

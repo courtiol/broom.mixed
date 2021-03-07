@@ -26,7 +26,7 @@
 See the Value section for details.}
 
 \item{conf.int}{If \code{TRUE} columns for the lower (\code{conf.low}) and upper (\code{conf.high}) bounds of the
-\code{100*prob}\% posterior uncertainty intervals are included. See
+\code{100*prob}\\% posterior uncertainty intervals are included. See
 \code{\link[rstanarm]{posterior_interval.stanreg}} for details.}
 
 \item{conf.level}{See \code{\link[rstanarm]{posterior_interval.stanreg}}.}
@@ -70,20 +70,20 @@ parameter is included if \code{effects="aux"}, for
 SD, R^2, and log(fit_ratio), etc.
 
 \code{glance} returns one row with the columns
-  \item{algorithm}{The algorithm used to fit the model.}
-  \item{pss}{The posterior sample size (except for models fit using
-  optimization).}
-  \item{nobs}{The number of observations used to fit the model.}
-  \item{sigma}{The square root of the estimated residual variance, if
-  applicable. If not applicable (e.g., for binomial GLMs), \code{sigma} will
-  be given the value \code{1} in the returned object.}
+\item{algorithm}{The algorithm used to fit the model.}
+\item{pss}{The posterior sample size (except for models fit using
+optimization).}
+\item{nobs}{The number of observations used to fit the model.}
+\item{sigma}{The square root of the estimated residual variance, if
+applicable. If not applicable (e.g., for binomial GLMs), \code{sigma} will
+be given the value \code{1} in the returned object.}
 
-  If \code{looic=TRUE}, then the following additional columns are also
-  included:
-  \item{looic}{The LOO Information Criterion.}
-  \item{elpd_loo}{The expected log predictive density (\code{elpd_loo = -2 *
+If \code{looic=TRUE}, then the following additional columns are also
+included:
+\item{looic}{The LOO Information Criterion.}
+\item{elpd_loo}{The expected log predictive density (\code{elpd_loo = -2 *
   looic}).}
-  \item{p_loo}{The effective number of parameters.}
+\item{p_loo}{The effective number of parameters.}
 }
 \description{
 These methods tidy the estimates from \code{\link[rstanarm]{stanreg-objects}}

@@ -13,8 +13,8 @@ paramNamesMCMCglmm(object, ...)
 }
 \value{
 A list with two elements:
-  \item{fixed}{A character vector of the fixed effects parameter names}
-  \item{random}{A character vector of the random effects parameter names}
+\item{fixed}{A character vector of the fixed effects parameter names}
+\item{random}{A character vector of the random effects parameter names}
 }
 \description{
 Simple function to extract the fixed and random effects

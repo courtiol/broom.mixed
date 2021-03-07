@@ -301,7 +301,7 @@ augment.lme <- function(x, data = x$data, newdata, ...) {
 #'   \item{BIC}{the Bayesian Information Criterion}
 #'   \item{deviance}{returned as NA. To quote Brian Ripley on R-help
 #' \url{https://stat.ethz.ch/pipermail/r-help/2006-May/104744.html},
-#'  "McCullagh & Nelder (1989) would be the authorative [sic] reference, but the 1982
+#'  "McCullagh & Nelder (1989) would be the authorative \[sic\] reference, but the 1982
 #' first edition manages to use 'deviance' in three separate senses on one
 #' page." }
 #'

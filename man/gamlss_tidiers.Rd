@@ -23,12 +23,12 @@ All tidying methods return a data.frame without rownames, whose
 structure depends on the method chosen.
 
 A tibble with one row for each coefficient, containing columns:
-  \item{parameter}{type of coefficient being estimated: \code{mu}, \code{sigma}, \code{nu}, or \code{tau}}
-  \item{term}{term in the model being estimated and tested}
-  \item{estimate}{estimated coefficient}
-  \item{std.error}{standard error}
-  \item{statistic}{t-statistic}
-  \item{p.value}{two-sided p-value}
+\item{parameter}{type of coefficient being estimated: \code{mu}, \code{sigma}, \code{nu}, or \code{tau}}
+\item{term}{term in the model being estimated and tested}
+\item{estimate}{estimated coefficient}
+\item{std.error}{standard error}
+\item{statistic}{t-statistic}
+\item{p.value}{two-sided p-value}
 }
 \description{
 Tidying methods for "gamlss" objects from the gamlss package.

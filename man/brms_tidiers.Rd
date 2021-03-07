@@ -38,13 +38,13 @@ See the Value section for details.}
 
 \item{robust}{Whether to use median and median absolute deviation of
 the posterior distribution, rather
-  than mean and standard deviation, to derive point estimates and uncertainty}
+than mean and standard deviation, to derive point estimates and uncertainty}
 
 \item{conf.int}{If \code{TRUE} columns for the lower (\code{conf.low})
 and upper bounds (\code{conf.high}) of posterior uncertainty intervals are included.}
 
 \item{conf.level}{Defines the range of the posterior uncertainty conf.int,
-such that \code{100 * conf.level}\% of the parameter's posterior distributio
+such that \code{100 * conf.level}\\% of the parameter's posterior distributio
 lies within the corresponding interval.
 Only used if \code{conf.int = TRUE}.}
 
