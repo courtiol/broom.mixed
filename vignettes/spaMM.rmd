@@ -34,6 +34,7 @@ library("broom.mixed")
 library("spaMM")
 library("lme4")
 library("glmmTMB")
+library("MASS")
 ```
 
 ## Homoscedastic LM
@@ -143,7 +144,11 @@ glance(glm_pois_log_fitme)
 ## Binomial GLM
 
 ### Fitting models
-TO COME
+```{r glm_binom, warning=FALSE}
+glm_binom_logit_glm <- glm(cbind(incidence, size - incidence) ~ period, family = binomial(link = "logit"), data = cbpp)
+glm_binom_logit_glmmTMB <- glmmTMB(cbind(incidence, size - incidence) ~ period, family = binomial(link = "logit"), data = cbpp)
+glm_binom_logit_fitme <- fitme(cbind(incidence, size - incidence) ~ period, family = binomial(link = "logit"), data = cbpp)
+```
 
 ### Outputs from `tidy()`
 TO COME
@@ -152,12 +157,20 @@ TO COME
 TO COME
 
 ### Outputs from `glance()`
-TO COME
+```{r glance glm_binom}
+glance(glm_binom_logit_glm)
+glance(glm_binom_logit_glmmTMB)
+glance(glm_binom_logit_fitme)
+```
+
 
 ## Negative Binomial GLM
 
 ### Fitting models
-TO COME
+```{r glm_negbin}
+glm_negbin_log_glm.nb <- glm.nb(total.fruits ~ amd, data = Arabidopsis)
+glm_negbin_log_fitme <- fitme(total.fruits ~ amd, family = negbin(link = "log"), data = Arabidopsis)
+```
 
 ### Outputs from `tidy()`
 TO COME
@@ -166,7 +179,16 @@ TO COME
 TO COME
 
 ### Outputs from `glance()`
-TO COME
+```{r glance glm_negbin}
+glance(glm_negbin_log_glm.nb)
+glance(glm_negbin_log_fitme)
+glance(glm_negbin_log_fitme, npar.details = TRUE)
+```
+
+#### FIXME?
+
+- I counted one extra parameter for this family (for the estimation of the `shape` parameter), but `glance.negbin()` does not (it relies internally on `glm_negbin_log_glm.nb$df.residual`, which does not factor `shape` in the computation). Who is correct?
+
 
 ## COM-Poisson GLM
 
