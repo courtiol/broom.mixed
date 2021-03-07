@@ -5,6 +5,7 @@ date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: yes
+    toc_depth: 4
 vignette: >
   %\VignetteIndexEntry{Testing broom.mixed for spaMM}
   %\VignetteEngine{knitr::rmarkdown}
@@ -54,7 +55,7 @@ glance(lm1_spaMM_fitme)
 glance(lm1_spaMM_fitme, npar.details = TRUE)
 ```
 
-#### Notes
+#### FIXME?
 Some statistics produced by `glance.lm()` are missing from `glance.HLfit()`:
 - `r-squared` \& `adj.r.squared` statistics $\rightarrow$ unlikely to work in general unless new function appear in spaMM, so perhaps it makes sense to skip it
 - `p.value` \& `df` $\rightarrow$ this corresponds to a test with a null model $\rightarrow$  unlikely to work in general so perhaps it makes sense to skip it
@@ -102,5 +103,162 @@ glance(lm3_spaMM_fitme)
 glance(lm4_spaMM_fitme)
 ```
 
-#### Notes
+#### FIXME?
 These cases do not seem to be handled properly $\rightarrow$ the question is whether we should deal with them and detect such cases and produce a warning
+
+## Poisson GLM
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+
+## Binomial GLM
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+## Negative Binomial GLM
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+## COM-Poisson GLM
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+## Zero truncated GLM
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+## LMM with 1 simple random effect
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+## LMM with 2 simple random effect
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+## LMM with random slopes
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+## LMM with autocorrelation
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+## LMM with correlation matrix
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+## DHLM
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+
+## GLMM
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+## DHGLM
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
+
+
+## Multivariate fits
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+TO COME
