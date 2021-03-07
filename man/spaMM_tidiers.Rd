@@ -11,7 +11,7 @@
 
 \method{augment}{HLfit}(x, ...)
 
-\method{glance}{HLfit}(x, ...)
+\method{glance}{HLfit}(x, AIC.details = FALSE, npar.details = FALSE, ...)
 }
 \arguments{
 \item{x}{An object of class \code{HLfit}, such as those from \code{fitme},
@@ -20,6 +20,17 @@
 \item{effects}{A character vector including one or more of "fixed" (fixed-effect parameters), "ran_pars" (variances and covariances or standard deviations and correlations of random effect terms) or "ran_vals" (conditional modes/BLUPs/latent variable estimates)}
 
 \item{...}{extra arguments (not used)}
+
+\item{AIC.details}{whether to include conditional AIC (cAIC) and dispersion AIC (dAIC), see \code{\link[spaMM:AIC]{spaMM::AIC()}}}
+
+\item{npar.details}{whether to include a breakdown of the number of parameters:
+\itemize{
+\item \code{npar.fixed} the number of parameters used to model fixed effects
+\item \code{npar.rand} the number of parameters used to model random effects variances and covariances
+\item \code{npar.cor} the number of parameters used to adjust autocorrelation
+\item \code{npar.family} the number of parameters used to adjust the error distribution (1 for NegBin, 0 otherwise)
+\item \code{npar.resid} the number of parameters used in the residual model ## FIXME: fixed, random or both?
+}}
 }
 \value{
 All tidying methods return a \code{tibble}.
@@ -32,9 +43,15 @@ responses of the \code{HLfit} class
 \examples{
 
 if (require("spaMM") && require("lme4")) {
-  lmm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
-  tidy(lmm1)
-  augment(lmm1)
-  glance(lmm1)
+  data("blackcap")
+  lmm2 <- fitme(Reaction ~ Days, data = sleepstudy, method = "REML")
+  lmm2 <- fitme(Reaction ~ Days + (Days | Subject), data = sleepstudy, method = "REML")
+  lmm2 <- fitme(migStatus ~ means + Matern(1|longitude+latitude), data = blackcap)
+  #tidy(lmm2)
+  #augment(lmm2)
+  glance(lmm2)
+  glance(lmm2, AIC.details = TRUE)
+  glance(lmm2, npar.details = TRUE)
+  glance(lmm2, AIC.details = TRUE, npar.details = TRUE)
 }
 }
