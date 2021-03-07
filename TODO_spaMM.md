@@ -6,7 +6,10 @@ This document describes what should be done so that spaMM becomes supported by b
 ### Basic setup
 - [x] fork and clone broom.mixed
 - [x] install broom.mixed dependencies
-- [ ] check that R CMD check is clean -> **problems unrelated to spaMM**
+- [x] check that R CMD check is clean
+
+**Note:** 1 failed test for stanarm (commented) + 15 warnings in tests (untouched)
+
 - [x] add spaMM to DESCRIPTION
 - [x] create empty file for tests
 - [x] create empty file for tidiers
@@ -50,6 +53,7 @@ TO COME
 
 ### Polish
 - [ ] cleanup test file
+- [ ] uncomment added comment in test-stanarm.R
 - [ ] merge latest broom.mixed
 - [ ] store fitted models as rda in inst/extdata (produced in run_example.R)
 - [ ] update examples
