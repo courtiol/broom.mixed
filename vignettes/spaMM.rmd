@@ -1,0 +1,106 @@
+---
+title: "Testing broom.mixed for spaMM"
+author: "Alexandre Courtiol"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: yes
+vignette: >
+  %\VignetteIndexEntry{Testing broom.mixed for spaMM}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE, message=FALSE}
+library(knitr)
+options(tibble.width = Inf)
+```
+
+## Introduction
+
+This vignette aims at testing the methods `tidy()`, `glance()` and `augment()` for the class of model `HLfit` produced by the R package `{spaMM}`.
+
+We use this vignette during the development of these methods to make sure that the correct outputs are obtained under various conditions.
+
+We will also compare the outputs with those produced by equivalent methods implemented in other packages fitting mixed and non-mixed packages.
+
+For this, we start by loading the packages required for this vignette
+```{r loading libraries, message=FALSE}
+library("broom")
+library("broom.mixed")
+library("spaMM")
+library("lme4")
+library("glmmTMB")
+```
+
+## Homoscedastic LM
+
+### Fitting models
+```{r lm1}
+lm1_lm <- lm(Sepal.Length ~ Species, data  = iris)
+lm1_spaMM_fitme <- fitme(Sepal.Length ~ Species, data  = iris)
+```
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+```{r glance lm1}
+glance(lm1_lm)
+glance(lm1_spaMM_fitme)
+glance(lm1_spaMM_fitme, npar.details = TRUE)
+```
+
+#### Notes
+Some statistics produced by `glance.lm()` are missing from `glance.HLfit()`:
+- `r-squared` \& `adj.r.squared` statistics $\rightarrow$ unlikely to work in general unless new function appear in spaMM, so perhaps it makes sense to skip it
+- `p.value` \& `df` $\rightarrow$ this corresponds to a test with a null model $\rightarrow$  unlikely to work in general so perhaps it makes sense to skip it
+- `BIC` $\rightarrow$  I don't know if there is a general version of it for GLMM...
+
+
+## Heteroscedastic LM
+
+### Fitting models
+```{r lm2, message=FALSE}
+lm2_glmmTMB <- glmmTMB(Sepal.Length ~ Species, dispformula = ~ Species, data  = iris)
+lm2_spaMM_fitme <- fitme(Sepal.Length ~ Species, resid.model = ~ Species, data  = iris)
+```
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+```{r glance lm2}
+glance(lm2_glmmTMB)
+glance(lm2_spaMM_fitme)
+```
+
+## Idiosyncratic LM
+
+### Fitting models
+```{r lm3_4, message=FALSE}
+lm3_spaMM_fitme <- fitme(Sepal.Length ~ -1, data  = iris) ## no estimate
+lm4_spaMM_fitme <- fitme(Sepal.Length ~ Petal.Length, data  = iris,
+                         etaFix = list(beta = c("Petal.Length" = 0.5)))  ## fixed estimate
+```
+
+### Outputs from `tidy()`
+TO COME
+
+### Outputs from `augment()`
+TO COME
+
+### Outputs from `glance()`
+```{r glance lm3_4}
+glance(lm3_spaMM_fitme)
+glance(lm4_spaMM_fitme)
+```
+
+#### Notes
+These cases do not seem to be handled properly $\rightarrow$ the question is whether we should deal with them and detect such cases and produce a warning
