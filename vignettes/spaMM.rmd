@@ -1,6 +1,6 @@
 ---
 title: "Testing broom.mixed for spaMM"
-author: "Alexandre Courtiol"
+author: "Alexandre Courtiol & François Rousset"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
@@ -8,8 +8,10 @@ output:
     toc_depth: 4
 vignette: >
   %\VignetteIndexEntry{Testing broom.mixed for spaMM}
-  %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE, message=FALSE}
@@ -108,6 +110,9 @@ These cases do not seem to be handled properly $\rightarrow$ the question is whe
 
 ## Poisson GLM
 
+### Fitting models
+TO COME
+
 ### Outputs from `tidy()`
 TO COME
 
@@ -120,6 +125,9 @@ TO COME
 
 ## Binomial GLM
 
+### Fitting models
+TO COME
+
 ### Outputs from `tidy()`
 TO COME
 
@@ -130,6 +138,9 @@ TO COME
 TO COME
 
 ## Negative Binomial GLM
+
+### Fitting models
+TO COME
 
 ### Outputs from `tidy()`
 TO COME
@@ -142,6 +153,9 @@ TO COME
 
 ## COM-Poisson GLM
 
+### Fitting models
+TO COME
+
 ### Outputs from `tidy()`
 TO COME
 
@@ -152,6 +166,9 @@ TO COME
 TO COME
 
 ## Zero truncated GLM
+
+### Fitting models
+TO COME
 
 ### Outputs from `tidy()`
 TO COME
@@ -164,6 +181,9 @@ TO COME
 
 ## LMM with 1 simple random effect
 
+### Fitting models
+TO COME
+
 ### Outputs from `tidy()`
 TO COME
 
@@ -173,7 +193,10 @@ TO COME
 ### Outputs from `glance()`
 TO COME
 
-## LMM with 2 simple random effect
+## LMM with 2 simple random effects
+
+### Fitting models
+TO COME
 
 ### Outputs from `tidy()`
 TO COME
@@ -186,6 +209,9 @@ TO COME
 
 ## LMM with random slopes
 
+### Fitting models
+TO COME
+
 ### Outputs from `tidy()`
 TO COME
 
@@ -196,6 +222,9 @@ TO COME
 TO COME
 
 ## LMM with autocorrelation
+
+### Fitting models
+TO COME
 
 ### Outputs from `tidy()`
 TO COME
@@ -208,6 +237,9 @@ TO COME
 
 ## LMM with correlation matrix
 
+### Fitting models
+TO COME
+
 ### Outputs from `tidy()`
 TO COME
 
@@ -218,6 +250,9 @@ TO COME
 TO COME
 
 ## DHLM
+
+### Fitting models
+TO COME
 
 ### Outputs from `tidy()`
 TO COME
@@ -231,6 +266,9 @@ TO COME
 
 ## GLMM
 
+### Fitting models
+TO COME
+
 ### Outputs from `tidy()`
 TO COME
 
@@ -241,6 +279,9 @@ TO COME
 TO COME
 
 ## DHGLM
+
+### Fitting models
+TO COME
 
 ### Outputs from `tidy()`
 TO COME
@@ -253,6 +294,9 @@ TO COME
 
 
 ## Multivariate fits
+
+### Fitting models
+TO COME
 
 ### Outputs from `tidy()`
 TO COME
