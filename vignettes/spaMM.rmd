@@ -116,8 +116,9 @@ These cases do not seem to be handled properly $\rightarrow$ the question is whe
 ## Poisson GLM
 
 ### Fitting models
-```{r glm_pos}
+```{r glm_pos, warning=FALSE}
 glm_pois_log_glm <- glm(total.fruits ~ amd, family = poisson(link = "log"), data = Arabidopsis)
+glm_pois_log_glmmTMB <- glmmTMB(total.fruits ~ amd, family = poisson(link = "log"), data = Arabidopsis)
 glm_pois_log_fitme <- fitme(total.fruits ~ amd, family = poisson(link = "log"), data = Arabidopsis)
 ```
 
@@ -130,13 +131,14 @@ TO COME
 ### Outputs from `glance()`
 ```{r glance glm_pos}
 glance(glm_pois_log_glm)
+glance(glm_pois_log_glmmTMB)
 glance(glm_pois_log_fitme)
 ```
 
 #### Fixme?
 
 - `glance.glm()` compares the model to a null model, albeit with no test $\rightarrow$ shall we do that?
-- again, we could drop the column `sigma` but perhaps it is best to keep it for enforcing a consistent output
+- again, we could drop the column `sigma` but perhaps it is best to keep it for enforcing a consistent output, or as `glance.glmmTMB()` we could indicate overdispersion as `sigma` (nb: they did not document that)...?
 
 ## Binomial GLM
 
