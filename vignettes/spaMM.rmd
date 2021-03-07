@@ -59,6 +59,7 @@ glance(lm1_spaMM_fitme, npar.details = TRUE)
 
 #### FIXME?
 Some statistics produced by `glance.lm()` are missing from `glance.HLfit()`:
+
 - `r-squared` \& `adj.r.squared` statistics $\rightarrow$ unlikely to work in general unless new function appear in spaMM, so perhaps it makes sense to skip it
 - `p.value` \& `df` $\rightarrow$ this corresponds to a test with a null model $\rightarrow$  unlikely to work in general so perhaps it makes sense to skip it
 - `BIC` $\rightarrow$  I don't know if there is a general version of it for GLMM...
@@ -67,7 +68,7 @@ Some statistics produced by `glance.lm()` are missing from `glance.HLfit()`:
 ## Heteroscedastic LM
 
 ### Fitting models
-```{r lm2, message=FALSE}
+```{r lm2, message=FALSE, warning=FALSE}
 lm2_glmmTMB <- glmmTMB(Sepal.Length ~ Species, dispformula = ~ Species, data  = iris)
 lm2_spaMM_fitme <- fitme(Sepal.Length ~ Species, resid.model = ~ Species, data  = iris)
 ```
@@ -83,6 +84,10 @@ TO COME
 glance(lm2_glmmTMB)
 glance(lm2_spaMM_fitme)
 ```
+
+#### FIXME?
+- here we could drop the column `sigma` but perhaps it is best to keep it for enforcing a consistent output
+
 
 ## Idiosyncratic LM
 
@@ -111,7 +116,10 @@ These cases do not seem to be handled properly $\rightarrow$ the question is whe
 ## Poisson GLM
 
 ### Fitting models
-TO COME
+```{r glm_pos}
+glm_pois_log_glm <- glm(total.fruits ~ amd, family = poisson(link = "log"), data = Arabidopsis)
+glm_pois_log_fitme <- fitme(total.fruits ~ amd, family = poisson(link = "log"), data = Arabidopsis)
+```
 
 ### Outputs from `tidy()`
 TO COME
@@ -120,8 +128,15 @@ TO COME
 TO COME
 
 ### Outputs from `glance()`
-TO COME
+```{r glance glm_pos}
+glance(glm_pois_log_glm)
+glance(glm_pois_log_fitme)
+```
 
+#### Fixme?
+
+- `glance.glm()` compares the model to a null model, albeit with no test $\rightarrow$ shall we do that?
+- again, we could drop the column `sigma` but perhaps it is best to keep it for enforcing a consistent output
 
 ## Binomial GLM
 

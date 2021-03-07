@@ -58,9 +58,12 @@ augment.HLfit <- function(x, ...) {
 #' @export
 glance.HLfit <- function(x, AIC.details = FALSE, npar.details = FALSE, ...) {
 
+  LMM <- x$family$family == "gaussian"
+  
   ## Add basic statistics:
   sigma <- sqrt(spaMM::get_residVar(x))
-  sigma <- ifelse(length(unique(sigma) > 1L), sigma[1L], NA)
+  sigma_length <- length(unique(sigma))
+  sigma <- ifelse(!LMM | sigma_length > 1L, NA, sigma[1L])
   AICs <- spaMM::AIC.HLfit(x, verbose = FALSE, also_cAIC = AIC.details)
 
   ret <- tibble::tibble(sigma = sigma,
