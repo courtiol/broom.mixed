@@ -27,8 +27,11 @@ Authors@R: c(
     person("Alexandre", "Courtiol",
       email = "courtiol@izw-berlin.de",
       role = "ctb",
-      comment = c(ORCID = "0000-0003-0637-2959")
-     )
+      comment = c(ORCID = "0000-0003-0637-2959")),
+    person("François", "Rousset",
+      email = "francois.rousset@umontpellier.fr",
+      role = "ctb",
+      comment = c(ORCID = "0000-0003-4670-0371"))
     )
 Maintainer: Ben Bolker <bolker@mcmaster.ca>
 Description: Convert fitted objects from various R mixed-model packages
