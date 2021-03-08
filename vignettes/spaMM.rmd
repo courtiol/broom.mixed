@@ -61,8 +61,8 @@ glance(lm1_spaMM_fitme, npar.details = TRUE)
 #### FIXME?
 Some statistics produced by `glance.lm()` are missing from `glance.HLfit()`:
 
-- `r-squared` \& `adj.r.squared` statistics $\rightarrow$ unlikely to work in general unless new function appear in spaMM, so perhaps it makes sense to skip it
-- `p.value` \& `df` $\rightarrow$ this corresponds to a test with a null model $\rightarrow$  unlikely to work in general so perhaps it makes sense to skip it
+- `r-squared` \& `adj.r.squared` statistics $\rightarrow$ unlikely to work in general unless new function appear in spaMM, so perhaps it makes sense to skip it.
+- `p.value` \& `df` $\rightarrow$ this corresponds to a test with a null model $\rightarrow$  unlikely to work in general so perhaps it makes sense to skip it.
 - `BIC` $\rightarrow$  I don't know if there is a general version of it for GLMM...
 
 
@@ -87,7 +87,8 @@ glance(lm2_spaMM_fitme)
 ```
 
 #### FIXME?
-- here we could drop the column `sigma` but perhaps it is best to keep it for enforcing a consistent output
+
+- here we could drop the column `sigma` but perhaps it is best to keep it for enforcing a consistent output.
 
 
 ## Idiosyncratic LM
@@ -112,7 +113,8 @@ glance(lm4_spaMM_fitme)
 ```
 
 #### FIXME?
-These cases do not seem to be handled properly $\rightarrow$ the question is whether we should deal with them and detect such cases and produce a warning
+
+- these cases do not seem to be handled properly $\rightarrow$ the question is whether we should deal with them and detect such cases and produce a warning.
 
 ## Poisson GLM
 
@@ -226,7 +228,12 @@ glance(glm_compois_fitme)
 ## Zero truncated GLM
 
 ### Fitting models
-TO COME
+```{r glm_truncpois, warning=FALSE}
+data("scotlip")
+scotlip_no_zero <- scotlip[scotlip$cases > 0, ]
+glm_truncpois_glmmTMB <- glmmTMB(cases ~ 1, family = truncated_poisson(link = "log"), data = scotlip_no_zero)
+glm_truncpois_fitme <- fitme(cases ~ 1, family = Tpoisson(link = "log"), data = scotlip_no_zero)
+```
 
 ### Outputs from `tidy()`
 TO COME
@@ -235,7 +242,15 @@ TO COME
 TO COME
 
 ### Outputs from `glance()`
-TO COME
+```{r glance glm_truncpois}
+glance(glm_truncpois_glmmTMB)
+glance(glm_truncpois_fitme)
+```
+
+#### FIXME?
+
+- again, weird sigma for glance output from glmmTMB.
+
 
 ## LMM with 1 simple random effect
 
