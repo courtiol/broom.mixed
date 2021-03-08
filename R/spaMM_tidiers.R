@@ -58,14 +58,19 @@ augment.HLfit <- function(x, ...) {
 #' @export
 glance.HLfit <- function(x, AIC.details = FALSE, npar.details = FALSE, ...) {
 
-  LMM <- x$family$family == "gaussian"
-  
-  ## Add basic statistics:
+  ## Compute sigma (what is called phi in spaMM: the residual variance)
   sigma <- sqrt(spaMM::get_residVar(x))
-  sigma_length <- length(unique(sigma))
-  sigma <- ifelse(!LMM | sigma_length > 1L, NA, sigma[1L])
+  
+  ### We only keep sigma is the family is gaussian and 
+  ### if the residual model and the data are such as only a single value is estimated
+  ### NB: the gaussian condition should be handled by the second condition but it is perhaps clearer that way
+  LMM <- x$family$family == "gaussian"
+  sigma <- ifelse(!LMM | length(unique(sigma)) > 1L, NA, sigma[1L])
+  
+  ## Compute AIC
   AICs <- spaMM::AIC.HLfit(x, verbose = FALSE, also_cAIC = AIC.details)
 
+  ## Store basic statistics into tibble:
   ret <- tibble::tibble(sigma = sigma,
                         logLik = spaMM::logLik.HLfit(x)[[1]],
                         AIC = AICs[[1]],
@@ -83,10 +88,11 @@ glance.HLfit <- function(x, AIC.details = FALSE, npar.details = FALSE, ...) {
   }
   
   ## Compute number of parameters (always):
+  ##FIXME here we do not distinguish between parameters provided by user vs those estimated!!
   tbl_npar <- tibble::tibble(npar.fixed = x$dfs$pforpv,
                              npar.rand = x$dfs$p_lambda,
                              npar.cor = x$dfs$p_corrPars,
-                             npar.family = ifelse(any(c("negbin", "COMPoisson") %in% x$family$family), 1L, 0L), ##FIXME this does not distinguish param provided vs estimated
+                             npar.family = ifelse(any(c("negbin", "COMPoisson") %in% x$family$family), 1L, 0L), 
                              npar.resid = x$dfs$p_fixef_phi,
                              npar = .data$npar.fixed + .data$npar.rand + .data$npar.cor + .data$npar.family + .data$npar.resid)
   
