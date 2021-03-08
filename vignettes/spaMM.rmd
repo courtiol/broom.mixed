@@ -167,8 +167,9 @@ glance(glm_binom_logit_fitme)
 ## Negative Binomial GLM
 
 ### Fitting models
-```{r glm_negbin}
+```{r glm_negbin, warning=FALSE}
 glm_negbin_log_glm.nb <- glm.nb(total.fruits ~ amd, data = Arabidopsis)
+glm_negbin_log_glmmTMB <- glmmTMB(total.fruits ~ amd, family = nbinom2(link = "log"), data = Arabidopsis)
 glm_negbin_log_fitme <- fitme(total.fruits ~ amd, family = negbin(link = "log"), data = Arabidopsis)
 ```
 
@@ -181,13 +182,15 @@ TO COME
 ### Outputs from `glance()`
 ```{r glance glm_negbin}
 glance(glm_negbin_log_glm.nb)
+glance(glm_negbin_log_glmmTMB)
 glance(glm_negbin_log_fitme)
 glance(glm_negbin_log_fitme, npar.details = TRUE)
 ```
 
 #### FIXME?
 
-- I counted one extra parameter for this family (for the estimation of the `shape` parameter), but `glance.negbin()` does not (it relies internally on `glm_negbin_log_glm.nb$df.residual`, which does not factor `shape` in the computation). Who is correct?
+- I counted one extra parameter for this family (for the estimation of the `shape` parameter) as in `glmmTMB()`, but `glance.negbin()` does not (it relies internally on `glm_negbin_log_glm.nb$df.residual`, which does not factor `shape` in the computation). I think this is best.
+- shall we provide sigma here? I don't think so but `glmmTMB()` returns something.
 
 
 ## COM-Poisson GLM
@@ -217,7 +220,7 @@ glance(glm_compois_fitme)
 
 #### FIXME?
 
-- shall we provide sigma here?
+- shall we provide sigma here? I don't think so but `glmmTMB()` returns something.
 
 
 ## Zero truncated GLM
