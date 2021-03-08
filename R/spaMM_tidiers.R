@@ -86,7 +86,7 @@ glance.HLfit <- function(x, AIC.details = FALSE, npar.details = FALSE, ...) {
   tbl_npar <- tibble::tibble(npar.fixed = x$dfs$pforpv,
                              npar.rand = x$dfs$p_lambda,
                              npar.cor = x$dfs$p_corrPars,
-                             npar.family = ifelse(x$family$family == "negbin", 1L, 0L),
+                             npar.family = ifelse(any(c("negbin", "COMPoisson") %in% x$family$family), 1L, 0L), ##FIXME this does not distinguish param provided vs estimated
                              npar.resid = x$dfs$p_fixef_phi,
                              npar = .data$npar.fixed + .data$npar.rand + .data$npar.cor + .data$npar.family + .data$npar.resid)
   

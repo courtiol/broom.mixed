@@ -193,7 +193,15 @@ glance(glm_negbin_log_fitme, npar.details = TRUE)
 ## COM-Poisson GLM
 
 ### Fitting models
-TO COME
+```{r glm_compois, warning=FALSE}
+data("freight")
+glm_compois_glmmTMB <- glmmTMB(broken ~ transfers, data = freight, family = compois(link = "log"))
+glm_compois_fitme <- fitme(broken ~ transfers, data = freight, family = COMPoisson(link = "loglambda"))
+```
+
+#### FIXME?
+
+- the two packages provide quite different estimates...
 
 ### Outputs from `tidy()`
 TO COME
@@ -202,7 +210,15 @@ TO COME
 TO COME
 
 ### Outputs from `glance()`
-TO COME
+```{r glance glm_compois}
+glance(glm_compois_glmmTMB)
+glance(glm_compois_fitme)
+```
+
+#### FIXME?
+
+- shall we provide sigma here?
+
 
 ## Zero truncated GLM
 
