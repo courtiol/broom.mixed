@@ -45,9 +45,9 @@ responses of the \code{HLfit} class
 if (require("spaMM") && require("lme4")) {
   data("blackcap")
   lmm2 <- fitme(Reaction ~ Days, data = sleepstudy, method = "REML")
-  lmm2 <- fitme(Reaction ~ Days + (Days | Subject), data = sleepstudy, method = "REML")
-  lmm2 <- fitme(migStatus ~ means + Matern(1|longitude+latitude), data = blackcap)
-  #tidy(lmm2)
+  #lmm2 <- fitme(Reaction ~ Days + (Days | Subject), data = sleepstudy, method = "REML")
+  #lmm2 <- fitme(migStatus ~ means + Matern(1|longitude+latitude), data = blackcap)
+  tidy(lmm2)
   #augment(lmm2)
   glance(lmm2)
   glance(lmm2, AIC.details = TRUE)

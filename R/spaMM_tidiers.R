@@ -18,9 +18,9 @@
 #' if (require("spaMM") && require("lme4")) {
 #'   data("blackcap")
 #'   lmm2 <- fitme(Reaction ~ Days, data = sleepstudy, method = "REML")
-#'   lmm2 <- fitme(Reaction ~ Days + (Days | Subject), data = sleepstudy, method = "REML")
-#'   lmm2 <- fitme(migStatus ~ means + Matern(1|longitude+latitude), data = blackcap)
-#'   #tidy(lmm2)
+#'   #lmm2 <- fitme(Reaction ~ Days + (Days | Subject), data = sleepstudy, method = "REML")
+#'   #lmm2 <- fitme(migStatus ~ means + Matern(1|longitude+latitude), data = blackcap)
+#'   tidy(lmm2)
 #'   #augment(lmm2)
 #'   glance(lmm2)
 #'   glance(lmm2, AIC.details = TRUE)
@@ -32,7 +32,53 @@ NULL
 #' @rdname spaMM_tidiers
 #' @export
 tidy.HLfit <- function(x, effects = c("ran_pars", "fixed"), ...) {
-  message("method not yet implemented")
+  
+  ## check that spaMM is installed (using fn from utilities.R)
+  assert_dependency("spaMM")
+  
+  ## create list for storing sub tables
+  ret_list <- list()
+  
+  ## format fixed effect coefficients
+  if ("fixed" %in% effects) {
+    ss <- spaMM::summary.HLfit(x, verbose = FALSE)
+    
+    tibble::as_tibble(ss$beta_table, rownames = "term") %>%
+      dplyr::rename(estimate = .data$Estimate,
+                    std.error = .data$`Cond. SE`,
+                    statistic = .data$`t-value`) %>%
+      dplyr::mutate(effect = "fixed", .before = 1L) -> tbl_fixed
+    
+    ret_list$fixed <- tbl_fixed
+  }
+  
+  ## format random effect coefficients
+  if ("ran_pars" %in% effects) {
+    tibble::as_tibble(VarCorr(x)) %>%
+      dplyr::rename_with(tolower) %>%
+      dplyr::rename_with(sub, pattern = "\\.$", replacement = "") %>%
+      dplyr::select(-.data$variance) -> tbl_random
+    
+    ### add columns corr if missing
+    if (ncol(dplyr::select(tbl_random, any_of("corr"))) == 0L) {
+      tbl_random$corr <- NA
+    }
+    
+  tbl_random %>%
+    dplyr::rename(sd = .data$std.dev, cor = "corr") %>% 
+    tidyr::pivot_longer(c(.data$sd, .data$cor), values_to = "estimate") %>%
+    dplyr::filter(!(.data$name == "cor" & is.na(.data$estimate))) %>%
+    dplyr::mutate(effect = "ran_pars", .before = 1L) %>%
+    dplyr::mutate(term = paste0(.data$name, getOption("broom.mixed.sep1"), .data$term)) %>% ##TODO: check separator to use
+    dplyr::select(-.data$name) -> tbl_random
+    
+  ret_list$ran_coefs <- tbl_random
+  }
+  
+  ## combine outputs
+  ret_list %>%
+    dplyr::bind_rows(.id = "effect") %>%
+    reorder_cols() ## function from utilities.R
 }
 
 #' @rdname spaMM_tidiers
