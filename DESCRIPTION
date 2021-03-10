@@ -73,7 +73,7 @@ Suggests:
     rstan,
     rstanarm,
     R2jags,
-    spaMM,
+    spaMM (>= 3.7.25),
     TMB
 URL: http://github.com/bbolker/broom.mixed
 BugReports: http://github.com/bbolker/broom.mixed/issues
