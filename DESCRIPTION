@@ -65,6 +65,7 @@ Suggests:
     lmerTest,
     lme4,
     Matrix,
+    MASS,
     MCMCglmm,
     mgcv,
     pander,
